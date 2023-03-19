@@ -1,9 +1,15 @@
 import Head from 'next/head'
 import Grid from '@mui/material/Typography'
 import Paper from '@mui/material/Toolbar'
+import Button from '@mui/material/Button'
 import SearchButton from '@/components/SearchButton'
 import CustomAppBar from '@/components/CustomAppBar'
-import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid'
+import {
+  DataGrid,
+  GridRowsProp,
+  GridColDef,
+  GridRowParams,
+} from '@mui/x-data-grid'
 import type {} from '@mui/x-data-grid/themeAugmentation'
 
 const rows: GridRowsProp = [
@@ -22,11 +28,22 @@ const rows: GridRowsProp = [
   },
 ]
 
+function visualizePackage(packageName: string) {
+  console.log(packageName)
+}
+
 const columns: GridColDef[] = [
   { field: 'package_name', headerName: 'Package Name', flex: 0.2 },
   { field: 'author', headerName: 'Author', flex: 0.2 },
   { field: 'last_updated', headerName: 'Last updated', flex: 0.2 },
-  { field: 'visualize', headerName: 'Visualize package', flex: 0.1 },
+  {
+    field: 'visualize',
+    headerName: 'Visualize package',
+    flex: 0.1,
+    renderCell: ({ row }: Partial<GridRowParams>) => (
+      <Button onClick={() => visualizePackage(row.name)}>Action</Button>
+    ),
+  },
 ]
 
 export default function Home() {
