@@ -8,13 +8,16 @@ export default function SearchButton() {
     <Paper
       component="form"
       sx={{
-        p: '2px 4px',
         display: 'flex',
-        alignItems: 'center',
+        margin: 'auto',
         width: 400,
+        pb: 4,
       }}
     >
       <TextField
+        sx={{
+          width: 400,
+        }}
         label="Search"
         InputProps={{
           endAdornment: (

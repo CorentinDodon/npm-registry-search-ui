@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import Grid from '@mui/material/Typography'
-import Paper from '@mui/material/Toolbar'
 import Button from '@mui/material/Button'
 import SearchButton from '@/components/SearchButton'
 import CustomAppBar from '@/components/CustomAppBar'
@@ -9,6 +8,7 @@ import {
   GridRowsProp,
   GridColDef,
   GridRowParams,
+  gridClasses,
 } from '@mui/x-data-grid'
 import type {} from '@mui/x-data-grid/themeAugmentation'
 
@@ -56,19 +56,28 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <CustomAppBar />
-
-      <SearchButton />
-      <Grid>
-        <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            checkboxSelection
-            autoHeight
-            loading={false}
-            sx={{ width: '80%' }}
-          />
-        </Paper>
+      <Grid sx={{ p: 2 }}>
+        <SearchButton />
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          autoHeight
+          loading={false}
+          rowSelection={false}
+          sx={{
+            display: 'flex',
+            width: '90%',
+            margin: 'auto',
+            [`& .${gridClasses.cell}:focus, & .${gridClasses.cell}:focus-within`]:
+              {
+                outline: 'none',
+              },
+            [`& .${gridClasses.columnHeader}:focus, & .${gridClasses.columnHeader}:focus-within`]:
+              {
+                outline: 'none',
+              },
+          }}
+        />
       </Grid>
     </>
   )
