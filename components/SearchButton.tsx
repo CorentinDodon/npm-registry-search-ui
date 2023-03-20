@@ -1,24 +1,28 @@
-import Paper from '@mui/material/Toolbar'
+import { useState } from 'react'
 import TextField from '@mui/material/TextField'
 import InputAdornment from '@mui/material/InputAdornment'
 import SearchIcon from '@mui/icons-material/Search'
 
-export default function SearchButton() {
+type SearchButtonProps = {
+  submit: (e: React.FormEvent, search: string) => void
+}
+export default function SearchButton({ submit }: SearchButtonProps) {
+  const [search, setSearch] = useState('')
+
   return (
-    <Paper
-      component="form"
-      sx={{
-        display: 'flex',
-        margin: 'auto',
-        width: 400,
-        pb: 4,
-      }}
-    >
+    <form onSubmit={(e) => submit(e, search)}>
       <TextField
         sx={{
+          display: 'flex',
+          margin: 'auto',
           width: 400,
+          pb: 4,
         }}
-        label="Search"
+        label="Search NPM package"
+        value={search}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+          setSearch(event.target.value)
+        }}
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
@@ -28,6 +32,6 @@ export default function SearchButton() {
         }}
         variant="standard"
       />
-    </Paper>
+    </form>
   )
 }
