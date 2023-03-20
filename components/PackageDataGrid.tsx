@@ -57,7 +57,8 @@ export default function PackageDataGrid({ search }: PackageDataGridProps) {
       headerName: 'Last updated',
       flex: 0.2,
       valueGetter: (params) => {
-        return params.row.package.date
+        const date = new Date(params.row.package.date)
+        return date.toLocaleString()
       },
     },
     {
