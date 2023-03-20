@@ -28,3 +28,15 @@ export const searchNpmRegistry = async (
     setIsLoading(false)
   }
 }
+
+export const getPackageDetails = async (name: string) => {
+  try {
+    const res = await fetch('https://registry.npmjs.org/' + name, {
+      method: 'GET',
+    })
+    const data = await res.json()
+    return data
+  } catch (err) {
+    console.log(err)
+  }
+}
