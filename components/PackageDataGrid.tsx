@@ -8,10 +8,7 @@ import {
 } from '@mui/x-data-grid'
 import { PackageListInterface } from '@/interfaces/PackageListInterface'
 import { searchNpmRegistry } from '@/api/npm-registry'
-
-function visualizePackage(packageName: string) {
-  console.log(packageName)
-}
+import Link from 'next/link'
 
 type PackageDataGridProps = {
   search: string
@@ -66,7 +63,9 @@ export default function PackageDataGrid({ search }: PackageDataGridProps) {
       headerName: 'Visualize package',
       flex: 0.1,
       renderCell: ({ row }: Partial<GridRowParams>) => (
-        <Button onClick={() => visualizePackage(row.name)}>Action</Button>
+        <Link href={`/package/${encodeURIComponent(row.package.name)}`}>
+          <Button>Action</Button>
+        </Link>
       ),
     },
   ]
