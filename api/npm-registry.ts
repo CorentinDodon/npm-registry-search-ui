@@ -4,9 +4,11 @@ import { PackageListInterface } from '@/interfaces/PackageListInterface'
 export const searchNpmRegistry = async (
   search: string,
   paginationModel: { page: number; pageSize: number },
-  setPackageList: Dispatch<SetStateAction<PackageListInterface>>
+  setPackageList: Dispatch<SetStateAction<PackageListInterface>>,
+  setIsLoading: Dispatch<SetStateAction<boolean>>
 ) => {
   try {
+    setIsLoading(true)
     const res = await fetch(
       'https://registry.npmjs.org/-/v1/search?text=' +
         search +
@@ -22,5 +24,7 @@ export const searchNpmRegistry = async (
     setPackageList(data)
   } catch (err) {
     console.log(err)
+  } finally {
+    setIsLoading(false)
   }
 }

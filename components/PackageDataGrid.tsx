@@ -25,6 +25,7 @@ export default function PackageDataGrid({ search }: PackageDataGridProps) {
     page: 0,
     pageSize: 20,
   })
+  const [isLoading, setIsLoading] = useState(false)
 
   const columns: GridColDef[] = [
     {
@@ -71,7 +72,7 @@ export default function PackageDataGrid({ search }: PackageDataGridProps) {
 
   useEffect(() => {
     if (!search) return
-    searchNpmRegistry(search, paginationModel, setPackageList)
+    searchNpmRegistry(search, paginationModel, setPackageList, setIsLoading)
   }, [search, paginationModel])
 
   return (
@@ -81,6 +82,7 @@ export default function PackageDataGrid({ search }: PackageDataGridProps) {
       columns={columns}
       autoHeight
       rowSelection={false}
+      loading={isLoading}
       rowCount={packageList.total}
       pageSizeOptions={[10, 20, 50, 100]}
       paginationModel={paginationModel}
