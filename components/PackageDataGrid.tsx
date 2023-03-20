@@ -23,7 +23,7 @@ export default function PackageDataGrid({ search }: PackageDataGridProps) {
   })
   const [paginationModel, setPaginationModel] = useState({
     page: 0,
-    pageSize: 20,
+    pageSize: 10,
   })
   const [isLoading, setIsLoading] = useState(false)
 
