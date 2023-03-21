@@ -58,11 +58,11 @@ export default function PackageDataGrid() {
     },
     {
       field: 'visualize',
-      headerName: 'Visualize package',
+      headerName: 'Action',
       flex: 0.1,
       renderCell: ({ row }: Partial<GridRowParams>) => (
         <Link href={`/package/${encodeURIComponent(row.package.name)}`}>
-          <Button>Action</Button>
+          <Button>Visualize</Button>
         </Link>
       ),
     },
