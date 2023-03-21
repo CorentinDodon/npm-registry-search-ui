@@ -19,13 +19,18 @@
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.55.0",
+    "@uiw/react-markdown-preview": "^4.1.10",
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
     "eslint-config-prettier": "^8.7.0",
     "next": "13.2.4",
+    "next-remove-imports": "^1.0.10",
     "prettier": "^2.8.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "5.0.2"
+  },
+  "devDependencies": {
+    "babel-loader": "^9.1.2"
   }
 }
