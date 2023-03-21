@@ -9,6 +9,42 @@ import {
 import { searchNpmRegistry } from '@/api/npm-registry'
 import Link from 'next/link'
 import { useStateContext } from '@/context'
+import { alpha, styled } from '@mui/material/styles'
+
+const ODD_OPACITY = 0.2
+
+const StripedDataGrid = styled(DataGrid)(({ theme }) => ({
+  [`& .${gridClasses.row}.even`]: {
+    backgroundColor: theme.palette.grey[200],
+    '&:hover, &.Mui-hovered': {
+      backgroundColor: alpha(theme.palette.primary.main, ODD_OPACITY),
+      '@media (hover: none)': {
+        backgroundColor: 'transparent',
+      },
+    },
+    '&.Mui-selected': {
+      backgroundColor: alpha(
+        theme.palette.primary.main,
+        ODD_OPACITY + theme.palette.action.selectedOpacity
+      ),
+      '&:hover, &.Mui-hovered': {
+        backgroundColor: alpha(
+          theme.palette.primary.main,
+          ODD_OPACITY +
+            theme.palette.action.selectedOpacity +
+            theme.palette.action.hoverOpacity
+        ),
+        // Reset on touch devices, it doesn't add specificity
+        '@media (hover: none)': {
+          backgroundColor: alpha(
+            theme.palette.primary.main,
+            ODD_OPACITY + theme.palette.action.selectedOpacity
+          ),
+        },
+      },
+    },
+  },
+}))
 
 export default function PackageDataGrid() {
   const {
@@ -74,7 +110,7 @@ export default function PackageDataGrid() {
   }, [search, paginationModel])
 
   return (
-    <DataGrid
+    <StripedDataGrid
       rows={packageList.objects}
       getRowId={(row) => row.package.name}
       columns={columns}
@@ -86,6 +122,9 @@ export default function PackageDataGrid() {
       paginationModel={paginationModel}
       paginationMode="server"
       onPaginationModelChange={setPaginationModel}
+      getRowClassName={(params) =>
+        params.indexRelativeToCurrentPage % 2 === 0 ? 'even' : 'odd'
+      }
       sx={{
         display: 'flex',
         width: '90%',
@@ -97,6 +136,13 @@ export default function PackageDataGrid() {
           {
             outline: 'none',
           },
+        '.MuiDataGrid-columnHeaders': {
+          backgroundColor: 'rgba(150, 152, 154, 0.8)',
+          fontSize: 18,
+        },
+        '.MuiDataGrid-columnSeparator': {
+          color: 'rgba(44, 46, 48, 0.8)',
+        },
       }}
     />
   )
