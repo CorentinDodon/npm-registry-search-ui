@@ -2,6 +2,7 @@ import { getPackageDetails } from '@/api/npm-registry'
 import Head from 'next/head'
 import CustomAppBar from '@/components/CustomAppBar'
 import PackageDetails from '@/components/PackageDetails'
+import ScrollToTopFab from '@/components/ScrollToTopFab'
 import Container from '@mui/material/Container'
 
 export default function Package({ packageDetails }) {
@@ -17,6 +18,7 @@ export default function Package({ packageDetails }) {
       <Container sx={{ p: 2 }}>
         <PackageDetails packageDetails={packageDetails} />
       </Container>
+      <ScrollToTopFab></ScrollToTopFab>
     </>
   )
 }

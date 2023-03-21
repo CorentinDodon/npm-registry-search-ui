@@ -4,6 +4,7 @@ import Grid from '@mui/material/Grid'
 import SearchButton from '@/components/SearchButton'
 import CustomAppBar from '@/components/CustomAppBar'
 import PackageDataGrid from '@/components/PackageDataGrid'
+import ScrollToTopFab from '@/components/ScrollToTopFab'
 
 export default function Home() {
   const [search, setSearch] = useState('')
@@ -28,6 +29,7 @@ export default function Home() {
           <PackageDataGrid search={search} />
         </Grid>
       </div>
+      <ScrollToTopFab></ScrollToTopFab>
     </>
   )
 }
