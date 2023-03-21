@@ -6,22 +6,18 @@ import {
   GridRowParams,
   gridClasses,
 } from '@mui/x-data-grid'
-import { PackageListInterface } from '@/interfaces/PackageListInterface'
 import { searchNpmRegistry } from '@/api/npm-registry'
 import Link from 'next/link'
+import { useStateContext } from '@/context'
 
-type PackageDataGridProps = {
-  search: string
-}
-export default function PackageDataGrid({ search }: PackageDataGridProps) {
-  const [packageList, setPackageList] = useState<PackageListInterface>({
-    objects: [],
-    total: 0,
-  })
-  const [paginationModel, setPaginationModel] = useState({
-    page: 0,
-    pageSize: 10,
-  })
+export default function PackageDataGrid() {
+  const {
+    packageList,
+    setPackageList,
+    paginationModel,
+    setPaginationModel,
+    search,
+  } = useStateContext()
   const [isLoading, setIsLoading] = useState(false)
 
   const columns: GridColDef[] = [
@@ -38,7 +34,9 @@ export default function PackageDataGrid({ search }: PackageDataGridProps) {
       headerName: 'Author',
       flex: 0.2,
       valueGetter: (params) => {
-        return params.row.package.publisher.username
+        return params.row.package.author
+          ? params.row.package.author.name
+          : params.row.package.publisher.username
       },
     },
     {

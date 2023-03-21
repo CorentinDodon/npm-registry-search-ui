@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import Head from 'next/head'
 import Grid from '@mui/material/Grid'
 import SearchButton from '@/components/SearchButton'
@@ -7,13 +6,6 @@ import PackageDataGrid from '@/components/PackageDataGrid'
 import ScrollToTopFab from '@/components/ScrollToTopFab'
 
 export default function Home() {
-  const [search, setSearch] = useState('')
-
-  const handleSearch = async (e: React.FormEvent, search: string) => {
-    e.preventDefault()
-    setSearch(search)
-  }
-
   return (
     <>
       <Head>
@@ -25,8 +17,8 @@ export default function Home() {
       <div>
         <CustomAppBar />
         <Grid sx={{ p: 2 }}>
-          <SearchButton submit={handleSearch} />
-          <PackageDataGrid search={search} />
+          <SearchButton />
+          <PackageDataGrid />
         </Grid>
       </div>
       <ScrollToTopFab></ScrollToTopFab>

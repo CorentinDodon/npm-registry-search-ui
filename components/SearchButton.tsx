@@ -1,16 +1,24 @@
-import { useState } from 'react'
 import TextField from '@mui/material/TextField'
 import InputAdornment from '@mui/material/InputAdornment'
 import SearchIcon from '@mui/icons-material/Search'
+import { useStateContext } from '@/context'
+import { useEffect, useState } from 'react'
 
-type SearchButtonProps = {
-  submit: (e: React.FormEvent, search: string) => void
-}
-export default function SearchButton({ submit }: SearchButtonProps) {
-  const [search, setSearch] = useState('')
+export default function SearchButton() {
+  const { search, setSearch } = useStateContext()
+
+  const [formSearch, setFormSearch] = useState()
+  const submit = async (e: React.FormEvent, search: string) => {
+    e.preventDefault()
+    setSearch(search)
+  }
+
+  useEffect(() => {
+    setFormSearch(search)
+  }, [search])
 
   return (
-    <form onSubmit={(e) => submit(e, search)}>
+    <form onSubmit={(e) => submit(e, formSearch)}>
       <TextField
         sx={{
           display: 'flex',
@@ -18,10 +26,11 @@ export default function SearchButton({ submit }: SearchButtonProps) {
           width: 400,
           pb: 4,
         }}
+        InputLabelProps={{ shrink: true }}
         label="Search NPM package"
-        value={search}
+        value={formSearch}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          setSearch(event.target.value)
+          setFormSearch(event.target.value)
         }}
         InputProps={{
           endAdornment: (
