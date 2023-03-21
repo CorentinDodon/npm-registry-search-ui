@@ -12,7 +12,10 @@ interface StateProps {
 
 export const StateContext = createContext<StateProps>({
   search: '',
-  paginationModel: {},
+  paginationModel: {
+    page: 0,
+    pageSize: 10,
+  },
   packageList: { objects: [], total: 0 },
   setSearch: () => {},
   setPaginationModel: () => {},
@@ -21,7 +24,10 @@ export const StateContext = createContext<StateProps>({
 
 export const StateProvider = (props) => {
   const [search, setSearch] = useState('')
-  const [paginationModel, setPaginationModel] = useState({})
+  const [paginationModel, setPaginationModel] = useState({
+    page: 0,
+    pageSize: 10,
+  })
   const [packageList, setPackageList] = useState({ objects: [], total: 0 })
 
   return (
